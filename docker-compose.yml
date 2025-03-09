@@ -3,6 +3,6 @@ services:
     container_name: timmy
     image: node:lts-alpine
     working_dir: "/timmy"
-    command: npm start
+    command: npm run serve
     volumes:
       - ./:/timmy
