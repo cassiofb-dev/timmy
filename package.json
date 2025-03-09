@@ -1,0 +1,17 @@
+{
+  "name": "timmy",
+  "version": "0.0.1",
+  "description": "translator bot using openai services",
+  "main": "src/timmy.js",
+  "scripts": {
+    "start": "node --env-file=.env src/timmy.js",
+    "deploy": "node --env-file=.env src/deploy-commands.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cassiofb-dev",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.18.0",
+    "openai": "^4.86.2"
+  }
+}

@@ -1,0 +1,8 @@
+services:
+  timmy:
+    container_name: timmy
+    image: node:lts-alpine
+    working_dir: "/timmy"
+    command: npm start
+    volumes:
+      - ./:/timmy
