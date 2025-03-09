@@ -38,9 +38,10 @@ module.exports = {
 
     try {
       const confirmation = await response.resource.message.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
+      await confirmation.deferUpdate();
       const language = confirmation.values[0];
       const translation = await getTranslation(message.content, language);
-      await confirmation.update({
+      await confirmation.editReply({
         content: translation,
         components: [],
       });
