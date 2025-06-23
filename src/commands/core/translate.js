@@ -1,6 +1,7 @@
 const { ContextMenuCommandBuilder, ApplicationCommandType, MessageFlags, StringSelectMenuBuilder, ActionRowBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
 const { getTranslation } = require('../../openai.js');
 const { languages } = require('../../utils/constants.js');
+const { truncateString } = require('../../utils/functions.js');
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -38,11 +39,15 @@ module.exports = {
 
     try {
       const confirmation = await response.resource.message.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
+  
       await confirmation.deferUpdate();
+
       const language = confirmation.values[0];
       const translation = await getTranslation(message.content, language);
+      const truncatedTranslation = truncateString(translation, 2000);
+
       await confirmation.editReply({
-        content: translation,
+        content: truncatedTranslation,
         components: [],
       });
     } catch (error) {
