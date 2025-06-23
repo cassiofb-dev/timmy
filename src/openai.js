@@ -17,7 +17,7 @@ async function getTranslation(text, language) {
 async function answer(prompt) {
     const response = await openai.responses.create({
         model: 'gpt-4o',
-        instructions: 'Reply the messages in a sarcastic and humorous way, while being informative with funny references. Make the answer no more than 1800 characters long.',
+        instructions: 'Reply the messages in a objective and short manner. Make the answer no more than 1800 characters long.',
         input: prompt,
     });
 
