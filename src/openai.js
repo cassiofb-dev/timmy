@@ -5,41 +5,23 @@ const openai = new OpenAI({
 });
 
 async function getTranslation(text, language) {
-    const completion = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-            {
-                role: "system",
-                content: "You facilitate cultural exchange and conversation, which can include raunchy jokes and comments. Interpreting these accurately is the most important way to prevent misunderstandings",
-            },
-            {
-                role: "user",
-                content: `Translate "${text}" to ${language}.`,
-            },
-        ],
-        store: false,
+    const response = await openai.responses.create({
+        model: 'gpt-4o',
+        instructions: 'You translate text to another language while localizing it for cultural context. Make the answer no more than 1800 characters long.',
+        input: `Translate "${text}" to ${language}.`,
     });
 
-    return completion.choices[0].message.content;
+    return response.output_text;
 }
 
 async function answer(prompt) {
-    const completion = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-            {
-                role: "system",
-                content: "Answer the user prompt with a short paragraph and a list of bullet points.",
-            },
-            {
-                role: "user",
-                content: prompt,
-            },
-        ],
-        store: false,
+    const response = await openai.responses.create({
+        model: 'gpt-4o',
+        instructions: 'Reply the messages in a sarcastic and humorous way, while being informative with funny references. Make the answer no more than 1800 characters long.',
+        input: prompt,
     });
 
-    return completion.choices[0].message.content;
+    return response.output_text;
 }
 
 module.exports = { getTranslation, answer };
