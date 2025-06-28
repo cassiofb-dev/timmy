@@ -19,6 +19,11 @@ async function answer(prompt) {
         model: 'gpt-4.1-mini',
         instructions: 'Reply the messages in a objective and short manner. Make the answer no more than 1800 characters long.',
         input: prompt,
+        tools: [
+            {
+                type: "web_search_preview",
+            }
+        ]
     });
 
     return response.output_text;

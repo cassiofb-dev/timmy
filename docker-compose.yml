@@ -1,7 +1,9 @@
 services:
   timmy:
     container_name: timmy
-    image: node:lts-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     working_dir: "/timmy"
     command: npm run serve
     volumes:

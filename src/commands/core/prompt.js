@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, ChatInputCommandInteraction } = require('discord.js');
 const { answer } = require('../../openai');
+const { truncateString } = require('../../utils/functions.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,7 +19,7 @@ module.exports = {
       const prompt = interaction.options.getString('prompt');
       await interaction.reply('Thinking...');
       const response = await answer(prompt);
-      await interaction.followUp(response);
+      await interaction.followUp(truncateString(response, 2000));
     } catch (error) {
       console.error(error);
     }
